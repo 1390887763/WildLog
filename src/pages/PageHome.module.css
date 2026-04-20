@@ -1,0 +1,397 @@
+:root {
+  --ig-bg: #000;
+  --ig-surface: #121212;
+  --ig-card: #1a1a1a;
+  --ig-border: #262626;
+  --ig-border-light: #363636;
+  --ig-text-primary: #fafafa;
+  --ig-text-secondary: #a8a8a8;
+  --ig-text-muted: #737373;
+  --ig-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  --ig-danger: #ed4956;
+  --ig-blue: #0095f6;
+}
+
+.container {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0 16px 80px;
+  min-height: 100vh;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 16px;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ig-border);
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: var(--ig-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.form {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--ig-border);
+}
+
+.uploadArea {
+  width: 100%;
+  height: 220px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  background: var(--ig-card);
+  border: 1.5px dashed var(--ig-border-light);
+  transition: border-color 0.2s;
+  margin-bottom: 16px;
+}
+
+.uploadArea:hover {
+  border-color: var(--ig-text-secondary);
+}
+
+.uploadPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--ig-text-muted);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.uploadPlaceholder::before {
+  content: '';
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--ig-gradient);
+  opacity: 0.8;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+}
+
+.preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.textarea {
+  width: 100%;
+  background: var(--ig-surface);
+  border: 1px solid var(--ig-border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 15px;
+  color: var(--ig-text-primary);
+  resize: none;
+  margin-bottom: 12px;
+  outline: none;
+  font-family: inherit;
+  line-height: 1.4;
+  transition: border-color 0.2s;
+}
+
+.textarea::placeholder {
+  color: var(--ig-text-muted);
+}
+
+.textarea:focus {
+  border-color: var(--ig-text-secondary);
+}
+
+.location {
+  color: var(--ig-text-secondary);
+  font-size: 13px;
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.submitBtn {
+  width: 100%;
+  background: var(--ig-gradient);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: opacity 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.submitBtn:hover {
+  opacity: 0.9;
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.recordList {
+  padding: 20px 0 0;
+}
+
+.recordList h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ig-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 16px;
+}
+
+.empty {
+  color: var(--ig-text-muted);
+  text-align: center;
+  padding: 60px 0;
+  font-size: 15px;
+}
+
+.card {
+  background: var(--ig-card);
+  border: 1px solid var(--ig-border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  position: relative;
+  touch-action: manipulation;
+}
+
+.cardImg {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--ig-gradient);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: white;
+  font-weight: 700;
+}
+
+.cardUserInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardUsername {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ig-text-primary);
+}
+
+.cardBody {
+  padding: 10px 14px 12px;
+}
+
+.cardBody p {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ig-text-primary);
+  word-break: break-word;
+}
+
+.cardBody .noteLabel {
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.time {
+  display: block;
+  color: var(--ig-text-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: 8px;
+}
+
+.card:active {
+  transform: scale(0.98);
+  transition: transform 0.1s;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 100;
+  animation: fadeIn 0.2s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.actionSheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 12px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: slideUp 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.dangerBtn,
+.cancelBtn {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 17px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s;
+}
+
+.dangerBtn {
+  background: var(--ig-danger);
+  color: white;
+}
+
+.dangerBtn:active {
+  background: #d13446;
+}
+
+.cancelBtn {
+  background: var(--ig-card);
+  color: var(--ig-text-primary);
+  border: 1px solid var(--ig-border-light);
+}
+
+.cancelBtn:active {
+  background: var(--ig-surface);
+}
+
+.alertOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 20px;
+}
+
+.alertBox {
+  background: var(--ig-card);
+  border: 1px solid var(--ig-border);
+  border-radius: 14px;
+  width: 280px;
+  overflow: hidden;
+  animation: alertScale 0.22s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes alertScale {
+  from { transform: scale(1.08); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.alertMsg {
+  padding: 20px 18px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ig-text-primary);
+  margin: 0;
+}
+
+.alertBtns {
+  display: flex;
+  border-top: 1px solid var(--ig-border);
+}
+
+.alertCancel,
+.alertConfirm {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: 15px 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.1s;
+}
+
+.alertCancel {
+  color: var(--ig-blue);
+  border-right: 1px solid var(--ig-border);
+}
+
+.alertCancel:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.alertConfirm {
+  color: var(--ig-danger);
+}
+
+.alertConfirm:active {
+  background: rgba(255, 255, 255, 0.05);
+}
