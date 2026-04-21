@@ -2,22 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { uploadImage, insertRecord, fetchRecords, deleteRecord } from '../lib/api'
 import styles from './PageHome.module.css'
 
-function ActionSheet({ visible, onCancel, onDelete }) {
-  if (!visible) return null
-
-  return (
-    <div className={styles.overlay} onClick={onCancel}>
-      <div className={styles.actionSheet} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.dangerBtn} onClick={onDelete}>删除</button>
-        <button className={styles.cancelBtn} onClick={onCancel}>取消</button>
-      </div>
-    </div>
-  )
-}
-
 function ConfirmAlert({ visible, message, onConfirm, onCancel }) {
   if (!visible) return null
-
   return (
     <div className={styles.alertOverlay} onClick={onCancel}>
       <div className={styles.alertBox} onClick={(e) => e.stopPropagation()}>
@@ -26,6 +12,27 @@ function ConfirmAlert({ visible, message, onConfirm, onCancel }) {
           <button className={styles.alertCancel} onClick={onCancel}>取消</button>
           <button className={styles.alertConfirm} onClick={onConfirm}>删除</button>
         </div>
+      </div>
+    </div>
+  )
+}
+
+function DetailModal({ record, onClose, onDelete }) {
+  if (!record) return null
+  return (
+    <div className={styles.modalOverlay} onClick={onClose}>
+      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+        <img src={record.image_url} alt="" className={styles.modalImg} />
+        <div className={styles.modalBody}>
+          <p>{record.note || '无描述'}</p>
+          <span className={styles.time}>
+            {new Date(record.created_at).toLocaleString('zh-CN')}
+          </span>
+        </div>
+        <button className={styles.modalDelete} onClick={() => onDelete(record.id)}>
+          删除此记录
+        </button>
+        <button className={styles.modalClose} onClick={onClose}>关闭</button>
       </div>
     </div>
   )
@@ -41,9 +48,8 @@ export default function PageHome() {
   const [loading, setLoading] = useState(false)
   const fileInputRef = useRef(null)
 
-  const [actionSheetId, setActionSheetId] = useState(null)
   const [confirmId, setConfirmId] = useState(null)
-  const longPressTimer = useRef(null)
+  const [viewingRecord, setViewingRecord] = useState(null)
 
   useEffect(() => {
     loadRecords()
@@ -97,30 +103,21 @@ export default function PageHome() {
     setLoading(false)
   }
 
-  function handleLongPressStart(id) {
-    longPressTimer.current = setTimeout(() => {
-      setActionSheetId(id)
-      navigator.vibrate?.(10)
-    }, 500)
-  }
-
-  function handleLongPressEnd() {
-    if (longPressTimer.current) {
-      clearTimeout(longPressTimer.current)
-      longPressTimer.current = null
-    }
-  }
-
   async function handleDelete() {
     try {
-      await deleteRecord(confirmId)
+      const record = records.find((r) => r.id === confirmId)
+      await deleteRecord(confirmId, record?.image_url)
       setConfirmId(null)
-      setActionSheetId(null)
       loadRecords()
     } catch (err) {
       console.error(err)
       alert('删除失败: ' + err.message)
     }
+  }
+
+  function handleModalDelete(id) {
+    setViewingRecord(null)
+    setConfirmId(id)
   }
 
   return (
@@ -145,7 +142,6 @@ export default function PageHome() {
             ref={fileInputRef}
             type="file"
             accept="image/*"
-            capture="environment"
             onChange={handleImageChange}
             hidden
           />
@@ -175,45 +171,24 @@ export default function PageHome() {
         {records.length === 0 ? (
           <p className={styles.empty}>还没有记录，去发现大自然吧 🌿</p>
         ) : (
-          records.map((record) => (
-            <div
-              key={record.id}
-              className={styles.card}
-              onTouchStart={() => handleLongPressStart(record.id)}
-              onTouchEnd={handleLongPressEnd}
-              onTouchCancel={handleLongPressEnd}
-              onMouseDown={() => handleLongPressStart(record.id)}
-              onMouseUp={handleLongPressEnd}
-              onMouseLeave={handleLongPressEnd}
-            >
-              <img src={record.image_url} alt="" className={styles.cardImg} />
-              <div className={styles.cardHeader}>
-                <div className={styles.avatar}>W</div>
-                <div className={styles.cardUserInfo}>
-                  <span className={styles.cardUsername}>wildlog</span>
-                </div>
+          <div className={styles.grid}>
+            {records.map((record) => (
+              <div
+                key={record.id}
+                className={styles.gridItem}
+                onClick={() => setViewingRecord(record)}
+              >
+                <img src={record.image_url} alt="" className={styles.gridImg} />
               </div>
-              <div className={styles.cardBody}>
-                <p>
-                  <span className={styles.noteLabel}>wildlog</span>
-                  {record.note || '无描述'}
-                </p>
-                <span className={styles.time}>
-                  {new Date(record.created_at).toLocaleString('zh-CN')}
-                </span>
-              </div>
-            </div>
-          ))
+            ))}
+          </div>
         )}
       </div>
 
-      <ActionSheet
-        visible={!!actionSheetId}
-        onCancel={() => setActionSheetId(null)}
-        onDelete={() => {
-          setConfirmId(actionSheetId)
-          setActionSheetId(null)
-        }}
+      <DetailModal
+        record={viewingRecord}
+        onClose={() => setViewingRecord(null)}
+        onDelete={handleModalDelete}
       />
 
       <ConfirmAlert

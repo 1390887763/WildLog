@@ -179,156 +179,121 @@
   font-size: 15px;
 }
 
-.card {
-  background: var(--ig-card);
-  border: 1px solid var(--ig-border);
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 16px;
-  position: relative;
-  touch-action: manipulation;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
 }
 
-.cardImg {
-  width: 100%;
+.gridItem {
   aspect-ratio: 1 / 1;
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gridImg {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.2s;
 }
 
-.cardHeader {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
+.gridItem:active .gridImg {
+  transform: scale(0.96);
 }
 
-.avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--ig-gradient);
-  flex-shrink: 0;
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 300;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  font-size: 14px;
-  color: white;
-  font-weight: 700;
+  animation: fadeIn 0.2s ease;
 }
 
-.cardUserInfo {
-  flex: 1;
-  min-width: 0;
+.modalContent {
+  width: 100%;
+  max-width: 540px;
+  background: var(--ig-card);
+  border-radius: 16px;
+  padding: 12px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 8px));
+  animation: slideUpModal 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-.cardUsername {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ig-text-primary);
+@keyframes slideUpModal {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }
 
-.cardBody {
-  padding: 10px 14px 12px;
+.modalImg {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  max-height: 55vh;
+  object-fit: cover;
 }
 
-.cardBody p {
-  font-size: 14px;
-  line-height: 1.4;
+.modalBody {
+  padding: 12px 0 8px;
+}
+
+.modalBody p {
+  font-size: 15px;
+  line-height: 1.5;
   color: var(--ig-text-primary);
   word-break: break-word;
+  margin: 0 0 6px;
 }
 
-.cardBody .noteLabel {
+.modalDelete {
+  width: 100%;
+  margin: 4px 0 0;
+  background: transparent;
+  border: none;
+  color: var(--ig-danger);
+  font-size: 15px;
   font-weight: 600;
-  margin-right: 6px;
+  padding: 14px 0;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  border-top: 1px solid var(--ig-border-light);
+}
+
+.modalClose {
+  width: 100%;
+  margin: 6px 0 0;
+  background: transparent;
+  border: none;
+  color: var(--ig-text-secondary);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 13px 0;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .time {
   display: block;
   color: var(--ig-text-muted);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  margin-top: 8px;
-}
-
-.card:active {
-  transform: scale(0.98);
-  transition: transform 0.1s;
-}
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  z-index: 100;
-  animation: fadeIn 0.2s ease;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.actionSheet {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 10px 12px;
-  padding-bottom: calc(16px + env(safe-area-inset-bottom));
-  background: transparent;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  animation: slideUp 0.28s cubic-bezier(0.32, 0.72, 0, 1);
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-
-.dangerBtn,
-.cancelBtn {
-  width: 100%;
-  border: none;
-  border-radius: 14px;
-  padding: 17px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: background 0.15s;
-}
-
-.dangerBtn {
-  background: var(--ig-danger);
-  color: white;
-}
-
-.dangerBtn:active {
-  background: #d13446;
-}
-
-.cancelBtn {
-  background: var(--ig-card);
-  color: var(--ig-text-primary);
-  border: 1px solid var(--ig-border-light);
-}
-
-.cancelBtn:active {
-  background: var(--ig-surface);
+  font-size: 12px;
+  margin-top: 6px;
 }
 
 .alertOverlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
-  z-index: 200;
+  z-index: 400;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -336,6 +301,11 @@
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   padding: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .alertBox {

@@ -38,7 +38,22 @@ export async function fetchRecords() {
   return data;
 }
 
-export async function deleteRecord(id) {
+export async function deleteRecord(id, imageUrl) {
+  if (imageUrl) {
+    const urlParts = imageUrl.split("/images/");
+    if (urlParts.length > 1) {
+      const filePath = urlParts[1];
+      console.log("[delete] removing storage file:", filePath);
+      const { error: storageError } = await supabase.storage
+        .from("images")
+        .remove([filePath]);
+      if (storageError)
+        console.warn("[delete] storage remove failed:", storageError.message);
+    } else {
+      console.warn("[delete] could not parse image_url:", imageUrl);
+    }
+  }
+
   const { error } = await supabase.from("logs").delete().eq("id", id);
 
   if (error) throw error;
