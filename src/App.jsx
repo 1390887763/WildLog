@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PageHome from './pages/PageHome'
+import PageAsset from './pages/PageAsset'
 import TabBar from './components/TabBar'
 import styles from './App.module.css'
 
@@ -20,6 +21,8 @@ export default function App() {
     switch (activeTab) {
       case 'home':
         return <PageHome />
+      case 'asset':
+        return <PageAsset />
       case 'map':
         return (
           <PlaceholderPage

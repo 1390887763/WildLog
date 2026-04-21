@@ -1,11 +1,34 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .app {
-  min-height: 100vh;
+  width: 100%;
+  max-width: 480px;
+  height: 100%;
+  max-height: 852px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
 
 .content {
   flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
 .placeholder {
@@ -13,7 +36,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 80px);
+  min-height: 100%;
   gap: 16px;
 }
 
@@ -30,4 +53,16 @@
 .placeholderDesc {
   font-size: 14px;
   color: #737373;
+}
+
+@media (min-width: 768px) {
+  .app {
+    border-left: 1px solid #262626;
+    border-right: 1px solid #262626;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: calc(100vh - 40px);
+  }
 }

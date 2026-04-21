@@ -1,0 +1,391 @@
+:root {
+  --ig-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  --ig-danger: #ed4956;
+  --ig-blue: #0095f6;
+  --ig-card: #1a1a1a;
+  --ig-surface: #121212;
+  --ig-border: #262626;
+  --ig-border-light: #363636;
+  --ig-text-primary: #fafafa;
+  --ig-text-secondary: #a8a8a8;
+  --ig-text-muted: #737373;
+}
+
+.container {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0 16px 80px;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ig-border);
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--ig-text-primary);
+  margin: 0;
+}
+
+.configBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s;
+}
+
+.configBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.form {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--ig-border);
+}
+
+.inputGroup {
+  margin-bottom: 14px;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ig-text-secondary);
+  margin-bottom: 6px;
+}
+
+.input {
+  width: 100%;
+  background: var(--ig-card);
+  border: 1px solid var(--ig-border);
+  border-radius: 12px;
+  padding: 13px 14px;
+  font-size: 15px;
+  color: var(--ig-text-primary);
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: var(--ig-text-muted);
+}
+
+.input:focus {
+  border-color: var(--ig-text-secondary);
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row .inputGroup {
+  flex: 1;
+}
+
+.saveBtn {
+  width: 100%;
+  background: var(--ig-gradient);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  margin-top: 4px;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.15s;
+}
+
+.saveBtn:hover {
+  opacity: 0.9;
+}
+
+.saveBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quickAddBtn {
+  width: 100%;
+  background: var(--ig-card);
+  color: #0095f6;
+  border: 1px solid #0095f6;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  margin-top: 16px;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, color 0.15s;
+}
+
+.quickAddBtn:hover {
+  background: rgba(0, 149, 246, 0.1);
+}
+
+.chartSection {
+  padding-top: 24px;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ig-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 0;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: var(--ig-text-muted);
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.chartHint {
+  font-size: 12px;
+  color: var(--ig-text-muted);
+  margin: -10px 0 14px;
+}
+
+.chartWrap {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 8px;
+}
+
+.chartWrap::-webkit-scrollbar {
+  display: none;
+}
+
+.tooltip {
+  background: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--ig-border-light);
+}
+
+.tooltipDate {
+  font-size: 12px;
+  color: var(--ig-text-muted);
+  margin: 0 0 2px;
+}
+
+.tooltipValue {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ig-text-primary);
+  margin: 0;
+}
+
+.tooltipTag {
+  font-size: 11px;
+  font-weight: 500;
+  margin-left: 6px;
+}
+
+.tagBlue {
+  color: #0095f6;
+}
+
+.tagDim {
+  color: var(--ig-text-muted);
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.summaryItem {
+  flex: 1;
+  background: var(--ig-card);
+  border: 1px solid var(--ig-border);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summaryLabel {
+  font-size: 12px;
+  color: var(--ig-text-muted);
+}
+
+.summaryValue {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ig-text-primary);
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modalBox {
+  background: var(--ig-card);
+  border: 1px solid var(--ig-border);
+  border-radius: 16px;
+  width: 280px;
+  overflow: hidden;
+  animation: modalIn 0.22s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes modalIn {
+  from { transform: scale(1.08); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modalTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ig-text-primary);
+  text-align: center;
+  margin: 20px 18px 14px;
+}
+
+.modalLabel {
+  display: block;
+  font-size: 12px;
+  color: var(--ig-text-muted);
+  margin-bottom: 4px;
+}
+
+.modalRow {
+  display: flex;
+  gap: 10px;
+  margin: 0 18px 10px;
+}
+
+.modalField {
+  flex: 1;
+}
+
+.modalFieldFull {
+  margin: 0 18px 12px;
+}
+
+.modalInput {
+  width: calc(100% - 36px);
+  display: block;
+  margin: 0 18px;
+  background: var(--ig-surface);
+  border: 1px solid var(--ig-border-light);
+  border-radius: 10px;
+  padding: 13px 14px;
+  font-size: 15px;
+  color: var(--ig-text-primary);
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.modalInput::placeholder {
+  color: var(--ig-text-muted);
+}
+
+.modalInput:focus {
+  border-color: var(--ig-text-secondary);
+}
+
+.modalBtns {
+  display: flex;
+  gap: 0;
+  margin-top: 16px;
+  border-top: 1px solid var(--ig-border);
+}
+
+.modalCancel,
+.modalSave {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: 15px 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.1s;
+}
+
+.modalCancel {
+  color: var(--ig-text-secondary);
+  border-right: 1px solid var(--ig-border);
+}
+
+.modalCancel:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.modalSave {
+  color: #0095f6;
+}
+
+.modalSave:active {
+  background: rgba(255, 255, 255, 0.05);
+}
